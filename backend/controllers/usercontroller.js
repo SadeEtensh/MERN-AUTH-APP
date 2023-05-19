@@ -20,7 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Invalid email or password");
   }
-  res.status(200).json({ message: "Auth User" });
+  // res.status(200).json({ message: "Auth User" });
 });
 
 //@desc Register a new user
@@ -53,7 +53,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid user data");
   }
-  res.status(200).json({ message: "Register User" });
+  // res.status(200).json({ message: "Register User" });
 });
 
 //@desc Logout user
@@ -71,7 +71,12 @@ const logoutUser = asyncHandler(async (req, res) => {
 //route GET /api/users/profilr
 //@access Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "User Profile" });
+  const user = {
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  };
+  res.status(200).json({ user });
 });
 
 //@desc Update user profile
